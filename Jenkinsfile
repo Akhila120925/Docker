@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Docker Image...'
-                bat 'docker build -t mypythonflaskapp .'
+                bat 'docker build -t sample .'
             }
         }
 
@@ -16,10 +16,10 @@ pipeline {
                 echo 'Running Docker Container...'
 
                 // Remove old container if it exists
-                bat 'docker rm -f mycontainer 2>nul || exit /b 0'
+                bat 'docker rm -f week7 2>nul || exit /b 0'
 
                 // Run the new container
-                bat 'docker run -d -p 5000:5000 --name mycontainer mypythonflaskapp'
+                bat 'docker run -d -p 5000:5000 --name week7 sample'
             }
         }
     }
