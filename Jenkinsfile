@@ -4,22 +4,18 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Build Image') {
             steps {
                 echo 'Building Docker Image...'
-                bat 'docker build -t sample .'
+                bat 'docker build -t registration .'
             }
         }
 
         stage('Run') {
             steps {
                 echo 'Running Docker Container...'
-
-                // Remove old container if it exists
-                bat 'docker rm -f week7 2>nul || exit /b 0'
-
-                // Run the new container
-                bat 'docker run -d -p 5000:5000 --name week7 sample'
+                bat 'docker rm -f reg_app 2>nul || exit /b 0'
+                bat 'docker run -d -p 5000:5000 --name reg_app registration'
             }
         }
     }
@@ -34,3 +30,5 @@ pipeline {
         }
     }
 }
+
+
